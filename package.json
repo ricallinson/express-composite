@@ -1,0 +1,25 @@
+{
+    "name": "express-composite",
+    "version": "0.0.1",
+    "description": "",
+    "author" : "Richard S Allinson <npm@mountainmansoftware.com>",
+    "engines" : {
+        "node" : ">= 0.6.0 < 0.12.0"
+    },
+    "scripts": {
+        "test": "./test/run"
+    },
+    "dependencies" : {
+        
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "jshint": "*",
+        "istanbul": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ricallinson/express-composite.git"
+    },
+    "license": "MIT"
+}
