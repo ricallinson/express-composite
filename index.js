@@ -45,13 +45,12 @@ exports.dispatch = function (cfg, req, res) {
 
     packsDir = req.app.get("packs dir") || "";
     moduleName = cfg.module || "";
-
     abspath = pathlib.resolve(packsDir, moduleName);
 
     try {
         require(abspath)[cfg.action](req, res);
     } catch (err) {
-        throw new Error("Function '" + cfg.action + "'' was not found in module '" + abspath + "'.");
+        throw new Error("Function '" + cfg.action + "'' was not found in module at '" + abspath + "'.");
     }
 
     return this;
@@ -74,6 +73,7 @@ exports.render = function (map, req, res, cb) {
             if (err) {
                 console.log(err);
             }
+            map.data = map.data || {};
             map.data.slots = slots;
             res.render(map.tmpl, map.data);
         };
