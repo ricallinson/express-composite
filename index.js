@@ -53,6 +53,8 @@ exports.dispatch = function (cfg, req, res) {
     } catch (err) {
         throw new Error("Function '" + cfg.action + "'' was not found in module '" + abspath + "'.");
     }
+
+    return true;
 };
 
 exports.render = function (map, req, res, cb) {
