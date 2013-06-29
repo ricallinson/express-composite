@@ -54,7 +54,7 @@ exports.dispatch = function (cfg, req, res) {
         throw new Error("Function '" + cfg.action + "'' was not found in module '" + abspath + "'.");
     }
 
-    return true;
+    return this;
 };
 
 exports.render = function (map, req, res, cb) {
