@@ -31,14 +31,28 @@ var pathlib = require("path");
 
 exports.dispatch = function (cfg, req, res) {
 
-    var controller,
+    var packsDir,
+        moduleName,
         abspath;
 
-    abspath = pathlib.join(req.app.get("packs dir"), cfg.module);
+    if (!cfg) {
+        throw new Error("A configuration object must be provided.");
+    }
 
-    controller = require(abspath);
+    if (!req || !res) {
+        throw new Error("The Express request, response objects must be provided.");
+    }
 
-    controller[cfg.action](req, res);
+    packsDir = req.app.get("packs dir") || "";
+    moduleName = cfg.module || "";
+
+    abspath = pathlib.resolve(packsDir, moduleName);
+
+    try {
+        require(abspath)[cfg.action](req, res);
+    } catch (err) {
+        throw new Error("Function '" + cfg.action + "'' was not found in module '" + abspath + "'.");
+    }
 };
 
 exports.render = function (map, req, res, cb) {

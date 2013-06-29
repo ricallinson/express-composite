@@ -26,19 +26,50 @@
 "use strict";
 
 var composite = require("../"),
-    pathlib = require("path"),
+    // pathlib = require("path"),
     assert = require("assert");
-
-describe("composite.render()", function () {
-
-    it("should return a function", function () {
-        assert.equal(typeof composite.render, "function");
-    });
-});
 
 describe("composite.dispatch()", function () {
 
     it("should return a function", function () {
         assert.equal(typeof composite.dispatch, "function");
+    });
+
+    it("should throw an error", function () {
+        assert.throws(function () {
+            composite.dispatch();
+        });
+    });
+
+    it("should throw an error", function () {
+        assert.throws(function () {
+            composite.dispatch({});
+        });
+    });
+
+    it("should throw an error", function () {
+        assert.throws(function () {
+            composite.dispatch({}, {});
+        });
+    });
+
+    it("should throw an error", function () {
+
+        var cfg = {},
+            req = {app: {}},
+            res = {};
+
+        req.app.get = function () {};
+
+        assert.throws(function () {
+            composite.dispatch(cfg, req, res);
+        });
+    });
+});
+
+describe("composite.render()", function () {
+
+    it("should return a function", function () {
+        assert.equal(typeof composite.render, "function");
     });
 });
